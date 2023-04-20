@@ -10,7 +10,8 @@ public class MainManager : MonoBehaviour
     public bool torchTwoBurning = false;
     public bool torchThreeBurning = false;
     public bool torchFourBurning = false;
-    public AudioSource igniteSFX;
+    public AudioSource igniteSFX; 
+    public AudioSource gateOpenSFX;
     public ParticleSystem torchOnePS;
     public ParticleSystem torchTwoPS;
     public ParticleSystem torchThreePS;
@@ -76,7 +77,15 @@ public class MainManager : MonoBehaviour
 
         if (burningTorchCount == 4)
         {
-            //Do something with gate boss etc...
+            StartCoroutine(gateOpen());
         }
+    }
+
+    private IEnumerator gateOpen()
+    {
+        //Do something with gate, boss, shader, etc...
+        yield return new WaitForSeconds(3f);
+        gateOpenSFX.PlayOneShot(gateOpenSFX.clip, 1f);
+        UnityEngine.Debug.Log("MainManager: Gate opened...");
     }
 }
