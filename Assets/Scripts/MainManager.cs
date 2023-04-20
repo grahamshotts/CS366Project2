@@ -12,6 +12,8 @@ public class MainManager : MonoBehaviour
     public bool torchFourBurning = false;
     public AudioSource igniteSFX; 
     public AudioSource gateOpenSFX;
+    public AudioSource misirlouMusic;
+    public AudioSource flameOfAtenMusic;
     public ParticleSystem torchOnePS;
     public ParticleSystem torchTwoPS;
     public ParticleSystem torchThreePS;
@@ -22,6 +24,8 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        misirlouMusic.PlayOneShot(misirlouMusic.clip, 1f);
+
         torchOnePS.Stop();
         torchTwoPS.Stop();
         torchThreePS.Stop();
@@ -85,7 +89,10 @@ public class MainManager : MonoBehaviour
     {
         //Do something with gate, boss, shader, etc...
         yield return new WaitForSeconds(3f);
+        misirlouMusic.Pause();
         gateOpenSFX.PlayOneShot(gateOpenSFX.clip, 1f);
         UnityEngine.Debug.Log("MainManager: Gate opened...");
+        yield return new WaitForSeconds(5f);
+        flameOfAtenMusic.PlayOneShot(flameOfAtenMusic.clip, 1f);
     }
 }
