@@ -29,7 +29,17 @@ public class FPMove : MonoBehaviour
     public AudioSource footstepTwoSFX;
     public AudioSource footstepThreeSFX; 
     public AudioSource footstepFourSFX;
+    public AudioSource manaAttackSFX;
+    public AudioSource manaPickupSFX;
+    public AudioSource manaRechargeSFX;
     public float walkSFXDelay = 0.5f;
+    public int manaMax = 100;
+    public float currentMana;
+    public int collectedManaPickups = 0;
+    public int manaRechargeAmmt = 30;
+    public float manaDischargeRate = 10f;
+    public TMP_Text manaCollectedText;
+    public TMP_Text manaRemainingText;
 
     //Private Variables:
     private float actualSpeed;
@@ -43,6 +53,8 @@ public class FPMove : MonoBehaviour
     private bool movingLeft = false;
     private bool movingRight = false;
     private bool footstepClipPlaying = false;
+    private bool rechargingMana = false;
+    private bool inInitialStartup = true;
     private Vector3 direction;
     private GameObject lightSourceGameObject; //Null reference workaround for keeping itemLight "filled" with a light
 
@@ -54,12 +66,26 @@ public class FPMove : MonoBehaviour
         actualSpeed = speed;
         direction = Vector3.zero;
         Cursor.lockState = CursorLockMode.Locked; //Lock cursor in middle of screen for traditional 1st person movement
+
+        //Mana:
+        currentMana = manaMax;
+        manaCollectedText.text = collectedManaPickups + " Recharges";
+        manaRemainingText.text = currentMana.ToString("F1") + "/" + manaMax + " Mana";
+
+        StartCoroutine(initialStartup());
     }
 
     // Update is called once per frame
     void Update()
     {
-        PuzzleMechanics();
+        if (inInitialStartup) //Work-around for mana not being 100 at start up...
+            return;
+
+        //Do interact mechanics (lighting torches, etc...)
+        InteractMechanics();
+
+        //Do attack mechanics:
+        AttackMechanics();
 
         //Get input and move every frame:
         GetInputAndMove();
@@ -249,7 +275,7 @@ public class FPMove : MonoBehaviour
         }
     }
 
-    private void PuzzleMechanics()
+    private void InteractMechanics()
     {
         Illuminate();
         //Is the player trying to collect an object?
@@ -266,9 +292,37 @@ public class FPMove : MonoBehaviour
                     hitGameObject.tag == "TorchThree" || hitGameObject.tag == "TorchFour") //Only can ignite object if it is a torch
                 {
                     mainManager.igniteTorch(hitGameObject.tag);
+
+                    //TO BE IMPLEMENTED: TORCH LIGHT (EITHER IN HERE OR IN MAINMANAGER)
+
                     //itemLight = lightSourceGameObject.GetComponent<Light>();
                 }
             }
+        }
+    }
+
+    public void AttackMechanics()
+    {
+        if (Input.GetKey(KeyCode.R) && !rechargingMana && collectedManaPickups > 0 && currentMana != 100f)
+        {
+            StartCoroutine(rechargeMana());
+        }
+
+        if (Input.GetKey(KeyCode.Mouse0) && currentMana > 0 && !rechargingMana)
+        {
+            currentMana -= manaDischargeRate * Time.deltaTime;
+            if (currentMana < 0)
+            {
+                currentMana = 0;
+            }
+
+            manaRemainingText.text = currentMana.ToString("F1") + "/" + manaMax + " Mana";
+
+            //TO BE IMPLEMENTED: ATTACK SFX
+
+            //TO BE IMPLEMENTED: ATTACK PARTICLES
+
+            //TO BE IMPLEMENTED: ATTACK MECHANICS
         }
     }
 
@@ -295,5 +349,49 @@ public class FPMove : MonoBehaviour
         }
         yield return new WaitForSeconds(walkSFXDelay);
         footstepClipPlaying = false;
+    }
+
+    private IEnumerator rechargeMana()
+    {
+        rechargingMana = true;
+        yield return new WaitForSeconds(0.4f);
+
+        collectedManaPickups--;
+        currentMana += manaRechargeAmmt;
+        if (currentMana > manaMax)
+        {
+            currentMana = manaMax;
+        }
+
+        manaCollectedText.text = collectedManaPickups + " Recharges";
+        manaRemainingText.text = currentMana.ToString("F1") + "/" + manaMax + " Mana";
+
+        //TO BE IMPLEMENTED: ATTACK SFX (~.5 second long clip needed)
+        //manaRechargeSFX.PlayOneShot(manaRechargeSFX.clip, 1f); //~.5 second long clip needed
+
+        yield return new WaitForSeconds(0.7f);
+        rechargingMana = false;
+    }
+
+    private IEnumerator initialStartup()
+    {
+        inInitialStartup = true;
+        yield return new WaitForSeconds(0.2f);
+        inInitialStartup = false;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        GameObject gameObject = other.gameObject;
+        if (gameObject.tag == "ManaPickup")
+        {
+            collectedManaPickups++;
+            manaCollectedText.text = collectedManaPickups + " Recharges";
+
+            //TO BE IMPLEMENTED: ATTACK SFX
+            //manaPickupSFX.PlayOneShot(manaPickupSFX.clip, 1f);
+
+            Destroy(gameObject);
+        }
     }
 }

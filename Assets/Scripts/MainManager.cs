@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,8 +19,22 @@ public class MainManager : MonoBehaviour
     public ParticleSystem torchTwoPS;
     public ParticleSystem torchThreePS;
     public ParticleSystem torchFourPS;
+    public Vector3 manaOneSpawnOne;
+    public Vector3 manaOneSpawnTwo;
+    public Vector3 manaOneSpawnThree;
+    public Vector3 manaTwoSpawnOne;
+    public Vector3 manaTwoSpawnTwo;
+    public Vector3 manaTwoSpawnThree;
+    public Vector3 manaThreeSpawnOne;
+    public Vector3 manaThreeSpawnTwo;
+    public Vector3 manaThreeSpawnThree;
+    public Vector3 manaFourSpawnOne;
+    public Vector3 manaFourSpawnTwo;
+    public Vector3 manaFourSpawnThree;
+    public GameObject manaPrefab;
 
     //Private Variables:
+    private GameObject tempManaObject;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +45,78 @@ public class MainManager : MonoBehaviour
         torchTwoPS.Stop();
         torchThreePS.Stop();
         torchFourPS.Stop();
+
+        int randomNum = UnityEngine.Random.Range(1, 4);
+        tempManaObject = Instantiate(manaPrefab);
+        switch (randomNum)
+        {
+            case 1:
+                tempManaObject.transform.position = manaOneSpawnOne;
+                break;
+            case 2:
+                tempManaObject.transform.position = manaOneSpawnTwo;
+                break;
+            case 3:
+                tempManaObject.transform.position = manaOneSpawnThree;
+                break;
+            default:
+                UnityEngine.Debug.Log("MainManager: Invalid spawn number...");
+                break;
+        }
+
+        randomNum = UnityEngine.Random.Range(1, 4);
+        tempManaObject = Instantiate(manaPrefab);
+        switch (randomNum)
+        {
+            case 1:
+                tempManaObject.transform.position = manaTwoSpawnOne;
+                break;
+            case 2:
+                tempManaObject.transform.position = manaTwoSpawnTwo;
+                break;
+            case 3:
+                tempManaObject.transform.position = manaTwoSpawnThree;
+                break;
+            default:
+                UnityEngine.Debug.Log("MainManager: Invalid spawn number...");
+                break;
+        }
+
+        randomNum = UnityEngine.Random.Range(1, 4);
+        tempManaObject = Instantiate(manaPrefab);
+        switch (randomNum)
+        {
+            case 1:
+                tempManaObject.transform.position = manaThreeSpawnOne;
+                break;
+            case 2:
+                tempManaObject.transform.position = manaThreeSpawnTwo;
+                break;
+            case 3:
+                tempManaObject.transform.position = manaThreeSpawnThree;
+                break;
+            default:
+                UnityEngine.Debug.Log("MainManager: Invalid spawn number...");
+                break;
+        }
+
+        randomNum = UnityEngine.Random.Range(1, 4);
+        tempManaObject = Instantiate(manaPrefab);
+        switch (randomNum)
+        {
+            case 1:
+                tempManaObject.transform.position = manaFourSpawnOne;
+                break;
+            case 2:
+                tempManaObject.transform.position = manaFourSpawnTwo;
+                break;
+            case 3:
+                tempManaObject.transform.position = manaFourSpawnThree;
+                break;
+            default:
+                UnityEngine.Debug.Log("MainManager: Invalid spawn number...");
+                break;
+        }
     }
 
     // Update is called once per frame
