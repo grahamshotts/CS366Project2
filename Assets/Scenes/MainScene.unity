@@ -14223,7 +14223,7 @@ GameObject:
   - component: {fileID: 935714919}
   - component: {fileID: 935714920}
   m_Layer: 0
-  m_Name: misirlouMusic
+  m_Name: templeofAmunRaMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14254,7 +14254,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 95c506215edbb0e4c86b4f78a2b0e36b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 298bdd225df06584a91b62eca43d4ff7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.4
   m_Pitch: 1
@@ -28288,7 +28288,7 @@ MonoBehaviour:
   torchFourBurning: 0
   igniteSFX: {fileID: 759524547}
   gateOpenSFX: {fileID: 781706274}
-  misirlouMusic: {fileID: 935714920}
+  templeofAmunRaMusic: {fileID: 935714920}
   flameOfAtenMusic: {fileID: 507572066}
   torchOnePS: {fileID: 226301331}
   torchTwoPS: {fileID: 1862829654}
