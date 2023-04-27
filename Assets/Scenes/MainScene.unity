@@ -13129,7 +13129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1214370927911739262, guid: 2896500f56880944a90a3745ccca6bcd, type: 3}
       propertyPath: homePosition.y
-      value: 1.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1214370927911739262, guid: 2896500f56880944a90a3745ccca6bcd, type: 3}
       propertyPath: homePosition.z
@@ -14026,6 +14026,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010163780642, guid: c9a1d73a420e7e14daf6d9bb2a2708fb, type: 3}
   m_PrefabInstance: {fileID: 1247374418}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &901064772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 901064773}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &901064773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901064772}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1982899245}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &934534578
 GameObject:
   m_ObjectHideFlags: 0
@@ -28560,6 +28591,7 @@ GameObject:
   - component: {fileID: 1982899246}
   - component: {fileID: 1982899248}
   - component: {fileID: 1982899249}
+  - component: {fileID: 1982899250}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -28647,6 +28679,7 @@ Transform:
   - {fileID: 1714384117}
   - {fileID: 1320191740}
   - {fileID: 1456865108}
+  - {fileID: 901064773}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28691,6 +28724,7 @@ MonoBehaviour:
   manaDischargeRate: 20
   manaCollectedText: {fileID: 1870901564}
   manaRemainingText: {fileID: 1081495049}
+  shooter: {fileID: 0}
 --- !u!143 &1982899247
 CharacterController:
   m_ObjectHideFlags: 0
@@ -28787,6 +28821,22 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1982899250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982899241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e635b88efc8ec444808719c5f39f057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 4839272745252800349, guid: 5ecd05c2b03ec1644b92fd8d6a90b4dc, type: 3}
+  shootPoint: {fileID: 901064772}
+  player: {fileID: 1982899241}
+  manaControl: {fileID: 0}
 --- !u!1 &1984615929
 GameObject:
   m_ObjectHideFlags: 0

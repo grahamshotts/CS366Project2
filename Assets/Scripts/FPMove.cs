@@ -40,6 +40,7 @@ public class FPMove : MonoBehaviour
     public float manaDischargeRate = 10f;
     public TMP_Text manaCollectedText;
     public TMP_Text manaRemainingText;
+    public PlayerShoot shooter;
 
     //Private Variables:
     private float actualSpeed;
@@ -323,6 +324,7 @@ public class FPMove : MonoBehaviour
             //TO BE IMPLEMENTED: ATTACK PARTICLES
 
             //TO BE IMPLEMENTED: ATTACK MECHANICS
+            
         }
     }
 
