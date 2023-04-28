@@ -15,10 +15,10 @@ public class PlayerShoot : MonoBehaviour
     public GameObject player;
     public FPMove manaControl;
 
-    /*private AudioSource PewPew;
+    public AudioSource PewPew;
     public AudioSource manaAttackSFX;
     public AudioSource manaPickupSFX;
-    public AudioSource manaRechargeSFX;*/
+    public AudioSource manaRechargeSFX;
 
     // Start is called before the first frame update
     void Start()
