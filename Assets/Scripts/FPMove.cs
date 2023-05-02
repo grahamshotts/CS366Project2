@@ -43,11 +43,11 @@ public class FPMove : MonoBehaviour
     public PlayerShoot shooter;
 
     //Private Variables:
-    private float actualSpeed;
+    public float actualSpeed;
     private float sprintBurstTime = 0f;
     private float xRotPos;
     private float yRotPos;
-    private float actualSpeedForward = 0;
+    public float actualSpeedForward = 0;
     private float actualSpeedRight = 0;
     private bool movingForward = false;
     private bool movingBackward = false;
@@ -368,8 +368,7 @@ public class FPMove : MonoBehaviour
         manaCollectedText.text = collectedManaPickups + " Recharges";
         manaRemainingText.text = currentMana.ToString("F1") + "/" + manaMax + " Mana";
 
-        //TO BE IMPLEMENTED: ATTACK SFX (~.5 second long clip needed)
-        //manaRechargeSFX.PlayOneShot(manaRechargeSFX.clip, 1f); //~.5 second long clip needed
+        manaRechargeSFX.PlayOneShot(manaRechargeSFX.clip, 1f); //~.5 second long clip needed
 
         yield return new WaitForSeconds(0.7f);
         rechargingMana = false;
@@ -390,8 +389,7 @@ public class FPMove : MonoBehaviour
             collectedManaPickups++;
             manaCollectedText.text = collectedManaPickups + " Recharges";
 
-            //TO BE IMPLEMENTED: ATTACK SFX
-            //manaPickupSFX.PlayOneShot(manaPickupSFX.clip, 1f);
+            manaPickupSFX.PlayOneShot(manaPickupSFX.clip, 1f);
 
             Destroy(gameObject);
         }

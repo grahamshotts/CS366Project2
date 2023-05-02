@@ -4,27 +4,22 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+    //Public Variables:
     public GameObject bullet;
     public GameObject shootPoint;
-
-    private bool inCoolDown = false;
-
-    private Vector3 screenPosition;
-    private Vector3 worldPosition;
-
     public GameObject player;
     public FPMove manaControl;
-
-    public AudioSource PewPew;
     public AudioSource manaAttackSFX;
-    public AudioSource manaPickupSFX;
-    public AudioSource manaRechargeSFX;
+    public float coolDownTime = 0.5f;
+    public float bulletSpeed = 5f;
+
+    //Private Variables:
+    private bool inCoolDown = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        //PewPew = GetComponent<AudioSource>();
-
+        //For controlling variables in FPMove:
         manaControl = player.GetComponent<FPMove>();
         manaControl.shooter = this;
     }
@@ -32,38 +27,34 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        screenPosition = Input.mousePosition;
-        screenPosition.z = Camera.main.nearClipPlane + 1;
-
-        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-
-        if (Input.GetKey(KeyCode.Space) && !inCoolDown && manaControl.currentMana >= 10)
+        //See if player is trying to shoot:
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && !inCoolDown && manaControl.currentMana >= 10)
         {
-            /*if (!PewPew.isPlaying)
-                PewPew.PlayOneShot(PewPew.clip, 0.6f);*/
+            //Manage cool down with coroutine:
             inCoolDown = true;
+            StartCoroutine(CoolDown());
+
+            //Spawn magic bullet:
             GameObject go = Instantiate(bullet);
             go.transform.position = shootPoint.transform.position;
-            go.transform.rotation = Quaternion.Euler(0, 0, 0);
+            go.transform.rotation = shootPoint.transform.rotation;
             BulletMove b = go.GetComponent<BulletMove>();
-            b.speed = 5f;
-            b.transform.rotation = transform.rotation;
-            Debug.Log("Rotation is: " + b.transform.rotation);
-            b.direction = new Vector3(transform.rotation.y, 0, 1);
+            b.speed = bulletSpeed + ((manaControl.actualSpeedForward) / Time.deltaTime);
+            b.transform.rotation = shootPoint.transform.rotation;
+            b.direction = shootPoint.transform.rotation.eulerAngles;
+
+            //Manage mana:
             manaControl.currentMana -= 10;
             manaControl.manaRemainingText.text = manaControl.currentMana.ToString("F1") + "/" + manaControl.manaMax + " Mana";
-            Debug.Log("Current Mana is: " + manaControl.currentMana);
 
-            Debug.Log(b.direction);
-            StartCoroutine(CoolDown());
+            //Play audio:
+            manaAttackSFX.PlayOneShot(manaAttackSFX.clip, 0.6f);
         }
-
-
     }
 
     IEnumerator CoolDown()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(coolDownTime);
         inCoolDown = false;
     }
 }

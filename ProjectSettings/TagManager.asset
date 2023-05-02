@@ -8,6 +8,9 @@ TagManager:
   - TorchTwo
   - TorchThree
   - TorchFour
+  - ManaPickup
+  - Enemy
+  - EnemyGroupOne
   layers:
   - Default
   - TransparentFX
