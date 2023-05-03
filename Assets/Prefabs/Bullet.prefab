@@ -1120,8 +1120,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.48956883
-          value: 0.54058635
+          time: 0.509802
+          value: 0.43247652
           inSlope: 0.024774529
           outSlope: 0.024774529
           tangentMode: 0
@@ -1129,8 +1129,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.5602776
-          value: 0
+          time: 0.5973717
+          value: 0.12162018
           inSlope: -1.4503038
           outSlope: -1.4503038
           tangentMode: 0
@@ -1138,8 +1138,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.73521745
-          value: 0
+          time: 0.69812334
+          value: 0.09459686
           inSlope: 3.7925425
           outSlope: 3.7925425
           tangentMode: 0
@@ -1147,8 +1147,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.8267144
-          value: 0.4636317
+          time: 0.7963494
+          value: 0.15282542
           inSlope: 0.23588902
           outSlope: 0.23588902
           tangentMode: 0
@@ -1156,16 +1156,7 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.91330206
-          value: 0
-          inSlope: -4.6111016
-          outSlope: -4.6111016
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
+          time: 0.9696655
           value: 0
           inSlope: -0.13068233
           outSlope: -0.13068233
@@ -5003,7 +4994,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5035026385330107302
 Transform:
   m_ObjectHideFlags: 0

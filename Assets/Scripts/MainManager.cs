@@ -32,9 +32,12 @@ public class MainManager : MonoBehaviour
     public Vector3 manaFourSpawnTwo;
     public Vector3 manaFourSpawnThree;
     public GameObject manaPrefab;
+    public GameObject gates;
+    public float gameMoveSpeed = 1.2f;
 
     //Private Variables:
     private GameObject tempManaObject;
+    private bool gatesMoving = false;
 
     // Start is called before the first frame update
     void Start()
@@ -122,7 +125,15 @@ public class MainManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gatesMoving)
+        {
+            gates.transform.position = new Vector3(gates.transform.position.x, gates.transform.position.y - gameMoveSpeed * Time.deltaTime, gates.transform.position.z);
+            if (gates.transform.position.y < -6f)
+            {
+                gatesMoving = false;
+                gates.transform.position = new Vector3(gates.transform.position.x, -6f, gates.transform.position.z);
+            }
+        }
     }
 
     public void igniteTorch(string torchTag)
@@ -176,6 +187,7 @@ public class MainManager : MonoBehaviour
     {
         //Do something with gate, boss, shader, etc...
         yield return new WaitForSeconds(3f);
+        gatesMoving = true;
         templeofAmunRaMusic.Pause();
         gateOpenSFX.PlayOneShot(gateOpenSFX.clip, 1f);
         UnityEngine.Debug.Log("MainManager: Gate opened...");
