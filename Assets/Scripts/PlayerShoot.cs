@@ -12,6 +12,10 @@ public class PlayerShoot : MonoBehaviour
     public AudioSource manaAttackSFX;
     public float coolDownTime = 0.5f;
     public float bulletSpeed = 5f;
+    public int enemiesHitGroupOne = 0;
+    public int enemiesHitGroupTwo = 0;
+    public int enemiesHitGroupThree = 0;
+    public int enemiesHitGroupFour = 0;
 
     //Private Variables:
     private bool inCoolDown = false;
@@ -28,7 +32,7 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         //See if player is trying to shoot:
-        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && !inCoolDown && manaControl.currentMana >= 10)
+        if (Input.GetKey(KeyCode.Mouse0) && !inCoolDown && manaControl.currentMana >= 10)
         {
             //Manage cool down with coroutine:
             inCoolDown = true;
@@ -40,6 +44,7 @@ public class PlayerShoot : MonoBehaviour
             go.transform.rotation = shootPoint.transform.rotation;
             BulletMove b = go.GetComponent<BulletMove>();
             b.speed = bulletSpeed + ((manaControl.actualSpeedForward) / Time.deltaTime);
+            b.playerShoot = this;
             b.transform.rotation = shootPoint.transform.rotation;
             b.direction = shootPoint.transform.rotation.eulerAngles;
 

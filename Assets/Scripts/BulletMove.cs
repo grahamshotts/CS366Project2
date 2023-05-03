@@ -7,6 +7,7 @@ public class BulletMove : MonoBehaviour
     //Public Variables:
     public Vector3 direction;
     public float speed = 0.1f;
+    public PlayerShoot playerShoot;
 
     // Start is called before the first frame update
     void Start()
@@ -30,14 +31,31 @@ public class BulletMove : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameObject gameObject = other.gameObject;
-        if (gameObject.tag == "Player")
-        {
-            //Destroy(gameObject);
-            Destroy(this.gameObject);
-        }
+        
         if (gameObject.tag == "EnemyGroupOne")
         {
-            //Destroy(gameObject);
+            playerShoot.enemiesHitGroupOne++;
+            Destroy(this.gameObject);
+            Destroy(gameObject);
+        }
+
+        if (gameObject.tag == "EnemyGroupTwo")
+        {
+            playerShoot.enemiesHitGroupTwo++;
+            Destroy(this.gameObject);
+            Destroy(gameObject);
+        }
+
+        if (gameObject.tag == "EnemyGroupThree")
+        {
+            playerShoot.enemiesHitGroupThree++;
+            Destroy(this.gameObject);
+            Destroy(gameObject);
+        }
+
+        if (gameObject.tag == "EnemyGroupFour")
+        {
+            playerShoot.enemiesHitGroupFour++;
             Destroy(this.gameObject);
             Destroy(gameObject);
         }

@@ -86,7 +86,7 @@ public class FPMove : MonoBehaviour
         InteractMechanics();
 
         //Do attack mechanics:
-        AttackMechanics();
+        RechargeMechanics();
 
         //Get input and move every frame:
         GetInputAndMove();
@@ -221,7 +221,7 @@ public class FPMove : MonoBehaviour
             switch(lightedGameObject.tag)
             {
                 case "TorchOne":
-                    if (mainManager.torchOneBurning)
+                    if (mainManager.torchOneBurning || shooter.enemiesHitGroupOne != 4)
                     {
                         igniteText.enabled = false;
                         itemLight.enabled = false;
@@ -232,7 +232,7 @@ public class FPMove : MonoBehaviour
                     itemLight.enabled = true;
                     break;
                 case "TorchTwo":
-                    if (mainManager.torchTwoBurning)
+                    if (mainManager.torchTwoBurning || shooter.enemiesHitGroupTwo != 4)
                     {
                         igniteText.enabled = false;
                         itemLight.enabled = false;
@@ -243,7 +243,7 @@ public class FPMove : MonoBehaviour
                     itemLight.enabled = true;
                     break;
                 case "TorchThree":
-                    if (mainManager.torchThreeBurning)
+                    if (mainManager.torchThreeBurning || shooter.enemiesHitGroupThree != 4)
                     {
                         igniteText.enabled = false;
                         itemLight.enabled = false;
@@ -254,7 +254,7 @@ public class FPMove : MonoBehaviour
                     itemLight.enabled = true;
                     break;
                 case "TorchFour":
-                    if (mainManager.torchFourBurning)
+                    if (mainManager.torchFourBurning || shooter.enemiesHitGroupFour != 4)
                     {
                         igniteText.enabled = false;
                         itemLight.enabled = false;
@@ -289,8 +289,8 @@ public class FPMove : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 3f))
             {
                 hitGameObject = hit.transform.gameObject;
-                if (hitGameObject.tag == "TorchOne" || hitGameObject.tag == "TorchTwo" ||
-                    hitGameObject.tag == "TorchThree" || hitGameObject.tag == "TorchFour") //Only can ignite object if it is a torch
+                if ((hitGameObject.tag == "TorchOne" && shooter.enemiesHitGroupOne == 4) || (hitGameObject.tag == "TorchTwo" && shooter.enemiesHitGroupTwo == 4) ||
+                    (hitGameObject.tag == "TorchThree" && shooter.enemiesHitGroupThree == 4) || (hitGameObject.tag == "TorchFour" && shooter.enemiesHitGroupFour == 4)) //Only can ignite object if it is a torch
                 {
                     mainManager.igniteTorch(hitGameObject.tag);
 
@@ -302,30 +302,30 @@ public class FPMove : MonoBehaviour
         }
     }
 
-    public void AttackMechanics()
+    public void RechargeMechanics()
     {
         if (Input.GetKey(KeyCode.R) && !rechargingMana && collectedManaPickups > 0 && currentMana != 100f)
         {
             StartCoroutine(rechargeMana());
         }
+        
+        //if (Input.GetKey(KeyCode.Mouse0) && currentMana > 0 && !rechargingMana)
+        //{
+        //    currentMana -= manaDischargeRate * Time.deltaTime;
+        //    if (currentMana < 0)
+        //    {
+        //        currentMana = 0;
+        //    }
 
-        if (Input.GetKey(KeyCode.Mouse0) && currentMana > 0 && !rechargingMana)
-        {
-            currentMana -= manaDischargeRate * Time.deltaTime;
-            if (currentMana < 0)
-            {
-                currentMana = 0;
-            }
+        //    manaRemainingText.text = currentMana.ToString("F1") + "/" + manaMax + " Mana";
 
-            manaRemainingText.text = currentMana.ToString("F1") + "/" + manaMax + " Mana";
+        //    //TO BE IMPLEMENTED: ATTACK SFX
 
-            //TO BE IMPLEMENTED: ATTACK SFX
+        //    //TO BE IMPLEMENTED: ATTACK PARTICLES
 
-            //TO BE IMPLEMENTED: ATTACK PARTICLES
-
-            //TO BE IMPLEMENTED: ATTACK MECHANICS
+        //    //TO BE IMPLEMENTED: ATTACK MECHANICS
             
-        }
+        //}
     }
 
     private IEnumerator playFootstepClip()
