@@ -77,6 +77,7 @@ public class EnemyMove : MonoBehaviour
             this.transform.Rotate(0, yRotateOffset, 0);
 
             //Attack Mechanics
+            
 
             return;
         } else
@@ -126,6 +127,13 @@ public class EnemyMove : MonoBehaviour
     {
         yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 100f) / 100f);
         inPause = false;
+    }
+
+    private IEnumerator attackPlayer()
+    {
+        yield return new WaitForSeconds(1);
+        //player.playerDamage(1);
+        
     }
 
     //private IEnumerator lineParticle()

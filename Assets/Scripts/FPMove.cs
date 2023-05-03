@@ -33,7 +33,9 @@ public class FPMove : MonoBehaviour
     public AudioSource manaPickupSFX;
     public AudioSource manaRechargeSFX;
     public AudioSource healthPickupSFX;
-    public AudioSource shieldPikcupSFX;
+    public AudioSource shieldPickupSFX;
+    public AudioSource shieldDamageSFX;
+    public AudioSource playerDamageSFX;
     public float walkSFXDelay = 0.5f;
     public int manaMax = 100;
     public float currentMana;
@@ -416,10 +418,23 @@ public class FPMove : MonoBehaviour
         }
         if (gameObject.tag == "ShieldPickup")
         {
-            shieldPikcupSFX.PlayOneShot(shieldPikcupSFX.clip, 1f);
+            shieldPickupSFX.PlayOneShot(shieldPickupSFX.clip, 1f);
         }
     }
 
+    public void damagePlayer(int damageAmount)
+    {
+        if (!Input.GetKey(KeyCode.Mouse1) && (currentShield > 0))
+        {
+            currentHealth -= damageAmount;
+            playerDamageSFX.PlayOneShot(playerDamageSFX.clip, 1f);
+        }
+        else
+        {
+            currentShield -= damageAmount;
+            shieldDamageSFX.PlayOneShot(playerDamageSFX.clip, 1f);
+        }
+    }
     public void playerDeath()
     {
         //insert player death code here
