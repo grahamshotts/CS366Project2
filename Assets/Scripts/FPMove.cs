@@ -32,6 +32,8 @@ public class FPMove : MonoBehaviour
     public AudioSource manaAttackSFX;
     public AudioSource manaPickupSFX;
     public AudioSource manaRechargeSFX;
+    public AudioSource healthPickupSFX;
+    public AudioSource shieldPikcupSFX;
     public float walkSFXDelay = 0.5f;
     public int manaMax = 100;
     public float currentMana;
@@ -40,6 +42,9 @@ public class FPMove : MonoBehaviour
     public float manaDischargeRate = 10f;
     public TMP_Text manaCollectedText;
     public TMP_Text manaRemainingText;
+    public TMP_Text healthText;
+    public int currentHealth;
+    public int currentShield;
     public PlayerShoot shooter;
 
     //Private Variables:
@@ -73,6 +78,14 @@ public class FPMove : MonoBehaviour
         manaCollectedText.text = collectedManaPickups + " Recharges";
         manaRemainingText.text = currentMana.ToString("F1") + "/" + manaMax + " Mana";
 
+        //Health:
+        currentHealth = 10;
+        healthText.text = currentHealth.ToString() + "/10 Health";
+
+        //Shield:
+        currentShield = 5;
+        
+
         StartCoroutine(initialStartup());
     }
 
@@ -90,6 +103,9 @@ public class FPMove : MonoBehaviour
 
         //Get input and move every frame:
         GetInputAndMove();
+
+        if (currentHealth <= 0)
+            playerDeath();
     }
 
     private void GetInputAndMove()
@@ -393,5 +409,19 @@ public class FPMove : MonoBehaviour
 
             Destroy(gameObject);
         }
+        if (gameObject.tag == "HealthPickup")
+        {
+            currentHealth = 10;
+            healthPickupSFX.PlayOneShot(healthPickupSFX.clip, 1f);
+        }
+        if (gameObject.tag == "ShieldPickup")
+        {
+            shieldPikcupSFX.PlayOneShot(shieldPikcupSFX.clip, 1f);
+        }
+    }
+
+    public void playerDeath()
+    {
+        //insert player death code here
     }
 }
