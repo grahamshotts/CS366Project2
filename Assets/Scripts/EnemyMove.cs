@@ -8,6 +8,8 @@ public class EnemyMove : MonoBehaviour
     //Public Variables:
     public float enemySpeed = 2f;
     public GameObject playerObject;
+    public MainManager mainManager;
+    public GameObject mainManagerObject;
     public Vector3 homePosition;
     //public GameObject checkpointOne;
     //public GameObject checkpointTwo;
@@ -34,6 +36,9 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {
         StartCoroutine(endPause());
+
+        mainManagerObject = GameObject.FindGameObjectWithTag("MainManager");
+        mainManager = mainManagerObject.GetComponent<MainManager>();
 
         tooClose += UnityEngine.Random.Range(-100f, 100f) / 50f;
 
@@ -67,6 +72,8 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        playerObject = mainManager.playerInstance;
         if (inPause)
             return;
 

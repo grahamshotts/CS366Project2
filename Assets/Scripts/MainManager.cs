@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MainManager : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class MainManager : MonoBehaviour
     public ParticleSystem torchTwoPS;
     public ParticleSystem torchThreePS;
     public ParticleSystem torchFourPS;
+    public GameObject torchOneLight;
+    public GameObject torchTwoLight;
+    public GameObject torchThreeLight;
+    public GameObject torchFourLight;
     public Vector3 manaOneSpawnOne;
     public Vector3 manaOneSpawnTwo;
     public Vector3 manaOneSpawnThree;
@@ -31,8 +36,15 @@ public class MainManager : MonoBehaviour
     public Vector3 manaFourSpawnOne;
     public Vector3 manaFourSpawnTwo;
     public Vector3 manaFourSpawnThree;
+    public Vector3 playerSpawnPoint;
+    public GameObject playerPrefab;
+    public GameObject playerInstance;
     public GameObject manaPrefab;
     public GameObject gates;
+    public TMP_Text manaCollectedText;
+    public TMP_Text manaRemainingText;
+    public TMP_Text healthText;
+    public TMP_Text igniteText;
     public float gameMoveSpeed = 1.2f;
 
     //Private Variables:
@@ -42,6 +54,15 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerInstance = Instantiate(playerPrefab);
+        FPMove fpMove = playerInstance.GetComponent<FPMove>();
+        fpMove.mainManager = this;
+        fpMove.manaCollectedText = manaCollectedText;
+        fpMove.manaRemainingText = manaRemainingText;
+        fpMove.healthText = healthText;
+        fpMove.igniteText = igniteText;
+        playerInstance.transform.position = playerSpawnPoint;
+
         templeofAmunRaMusic.PlayOneShot(templeofAmunRaMusic.clip, 1f);
 
         torchOnePS.Stop();
@@ -147,6 +168,7 @@ public class MainManager : MonoBehaviour
                 burningTorchCount++;
                 torchOneBurning = true;
                 torchOnePS.Play();
+                torchOneLight.SetActive(true);
                 break;
             case "TorchTwo":
                 if (torchTwoBurning)
@@ -155,6 +177,7 @@ public class MainManager : MonoBehaviour
                 burningTorchCount++;
                 torchTwoBurning = true;
                 torchTwoPS.Play();
+                torchTwoLight.SetActive(true);
                 break;
             case "TorchThree":
                 if (torchThreeBurning)
@@ -163,6 +186,7 @@ public class MainManager : MonoBehaviour
                 burningTorchCount++;
                 torchThreeBurning = true;
                 torchThreePS.Play();
+                torchThreeLight.SetActive(true);
                 break;
             case "TorchFour":
                 if (torchFourBurning)
@@ -171,6 +195,7 @@ public class MainManager : MonoBehaviour
                 burningTorchCount++;
                 torchFourBurning = true;
                 torchFourPS.Play();
+                torchFourLight.SetActive(true);
                 break;
             default:
                 UnityEngine.Debug.Log("MainManager: Unknown Object Attempted To Be Ignited...");
@@ -187,11 +212,12 @@ public class MainManager : MonoBehaviour
     {
         //Do something with gate, boss, shader, etc...
         yield return new WaitForSeconds(3f);
-        gatesMoving = true;
         templeofAmunRaMusic.Pause();
         gateOpenSFX.PlayOneShot(gateOpenSFX.clip, 1f);
         UnityEngine.Debug.Log("MainManager: Gate opened...");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.2f);
+        gatesMoving = true;
+        yield return new WaitForSeconds(3.8f);
         flameOfAtenMusic.PlayOneShot(flameOfAtenMusic.clip, 1f);
     }
 }

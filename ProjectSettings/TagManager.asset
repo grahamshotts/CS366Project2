@@ -11,6 +11,10 @@ TagManager:
   - ManaPickup
   - Enemy
   - EnemyGroupOne
+  - EnemyGroupTwo
+  - EnemyGroupThree
+  - EnemyGroupFour
+  - MainManager
   layers:
   - Default
   - TransparentFX

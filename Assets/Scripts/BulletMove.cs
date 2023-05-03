@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletMove : MonoBehaviour
 {
     //Public Variables:
+    public AudioSource enemyHitSFX;
     public Vector3 direction;
     public float speed = 0.1f;
     public PlayerShoot playerShoot;
@@ -34,29 +35,33 @@ public class BulletMove : MonoBehaviour
         
         if (gameObject.tag == "EnemyGroupOne")
         {
+            //Play audio:
+            enemyHitSFX.PlayOneShot(enemyHitSFX.clip, 1f);
             playerShoot.enemiesHitGroupOne++;
-            Destroy(this.gameObject);
             Destroy(gameObject);
         }
 
         if (gameObject.tag == "EnemyGroupTwo")
         {
+            //Play audio:
+            enemyHitSFX.PlayOneShot(enemyHitSFX.clip, 1f);
             playerShoot.enemiesHitGroupTwo++;
-            Destroy(this.gameObject);
             Destroy(gameObject);
         }
 
         if (gameObject.tag == "EnemyGroupThree")
         {
+            //Play audio:
+            enemyHitSFX.PlayOneShot(enemyHitSFX.clip, 1f);
             playerShoot.enemiesHitGroupThree++;
-            Destroy(this.gameObject);
             Destroy(gameObject);
         }
 
         if (gameObject.tag == "EnemyGroupFour")
         {
+            //Play audio:
+            enemyHitSFX.PlayOneShot(enemyHitSFX.clip, 1f);
             playerShoot.enemiesHitGroupFour++;
-            Destroy(this.gameObject);
             Destroy(gameObject);
         }
     }
