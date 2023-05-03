@@ -32381,6 +32381,8 @@ MonoBehaviour:
   manaAttackSFX: {fileID: 1714384118}
   manaPickupSFX: {fileID: 1456865109}
   manaRechargeSFX: {fileID: 1320191741}
+  healthPickupSFX: {fileID: 0}
+  shieldPikcupSFX: {fileID: 0}
   walkSFXDelay: 0.5
   manaMax: 100
   currentMana: 0
@@ -32389,6 +32391,9 @@ MonoBehaviour:
   manaDischargeRate: 20
   manaCollectedText: {fileID: 1870901564}
   manaRemainingText: {fileID: 1081495049}
+  healthText: {fileID: 0}
+  currentHealth: 0
+  currentShield: 0
   shooter: {fileID: 1982899250}
   actualSpeed: 0
   actualSpeedForward: 0
@@ -34186,7 +34191,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100/100 Health
+  m_text: 10/10 Health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
