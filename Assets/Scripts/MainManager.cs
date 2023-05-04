@@ -51,6 +51,8 @@ public class MainManager : MonoBehaviour
     public TMP_Text manaRemainingText;
     public TMP_Text healthText;
     public TMP_Text igniteText;
+    //Misc
+    public bool playerInAnubisArea = false; 
 
     //Player
     public Vector3 playerSpawnPoint;
@@ -62,7 +64,8 @@ public class MainManager : MonoBehaviour
 
     //Private Variables:
     private GameObject tempManaObject;
-    private bool gatesMoving = false;
+    private bool gateMovingDown = false;
+    private bool gateMovingUp = false;
 
     // Start is called before the first frame update
     void Start()
@@ -159,15 +162,26 @@ public class MainManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gatesMoving)
+        if (gateMovingDown)
         {
             gates.transform.position = new Vector3(gates.transform.position.x, gates.transform.position.y - gameMoveSpeed * Time.deltaTime, gates.transform.position.z);
             if (gates.transform.position.y < -6f)
             {
-                gatesMoving = false;
+                gateMovingDown = false;
                 gates.transform.position = new Vector3(gates.transform.position.x, -6f, gates.transform.position.z);
             }
         }
+
+        if (gateMovingUp)
+        {
+            gates.transform.position = new Vector3(gates.transform.position.x, gates.transform.position.y + gameMoveSpeed * Time.deltaTime, gates.transform.position.z);
+            if (gates.transform.position.y > 0f)
+            {
+                gateMovingUp = false;
+                gates.transform.position = new Vector3(gates.transform.position.x, 0f, gates.transform.position.z);
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.BackQuote) && !birminghamMode)
         {
             birminghamMode = true;
@@ -268,10 +282,29 @@ public class MainManager : MonoBehaviour
         gateOpenSFX.PlayOneShot(gateOpenSFX.clip, 1f);
         UnityEngine.Debug.Log("MainManager: Gate opened...");
         yield return new WaitForSeconds(1.2f);
-        gatesMoving = true;
+        gateMovingDown = true;
         yield return new WaitForSeconds(3.8f);
         if(!birminghamMode)
             flameOfAtenMusic.PlayOneShot(flameOfAtenMusic.clip, 1f);
     }
 
+    private IEnumerator gateClose()
+    {
+        gateOpenSFX.PlayOneShot(gateOpenSFX.clip, 1f);
+        yield return new WaitForSeconds(1f);
+        gateMovingUp = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject gameObject = other.gameObject;
+
+        if (gameObject.tag == "Player")
+        {
+            if (playerInAnubisArea)
+                return;
+            StartCoroutine(gateClose());
+            playerInAnubisArea = true;
+        }
+    }
 }

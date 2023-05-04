@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6453,7 +6453,7 @@ MonoBehaviour:
   homePosition: {x: 0, y: 0, z: 0}
   homeOffset: 3
   zOffset: 1.08
-  tooClose: 4
+  tooClose: 2
   collisionMargin: 0.2
   yRotateOffset: 0
   enemyPos: 0
@@ -48714,6 +48714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1916878487}
   - component: {fileID: 1916878486}
+  - component: {fileID: 1916878488}
   m_Layer: 0
   m_Name: MainManager
   m_TagString: MainManager
@@ -48772,6 +48773,7 @@ MonoBehaviour:
   manaRemainingText: {fileID: 1081495049}
   healthText: {fileID: 2139101729}
   igniteText: {fileID: 601601331}
+  playerInAnubisArea: 0
   playerSpawnPoint: {x: 15, y: 1.08, z: -3}
   playerPrefab: {fileID: 997303516672603142, guid: 6ac0d8c7e9457cc439a906bc38ea9e19, type: 3}
   playerInstance: {fileID: 0}
@@ -48799,6 +48801,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1916878488
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916878485}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16, y: 8, z: 16}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1920438528
 PrefabInstance:
   m_ObjectHideFlags: 0
