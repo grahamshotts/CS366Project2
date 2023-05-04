@@ -555,7 +555,7 @@ MonoBehaviour:
   manaMax: 100
   currentMana: 0
   collectedManaPickups: 0
-  manaRechargeAmmt: 30
+  manaRechargeAmmt: 50
   manaDischargeRate: 20
   currentHealth: 0
   currentShield: 0
