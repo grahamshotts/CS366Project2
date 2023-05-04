@@ -22,7 +22,8 @@ public class MainManager : MonoBehaviour
     public GameObject torchThreeLight;
     public GameObject torchFourLight;
     //Sound
-    public AudioSource igniteSFX; 
+    public AudioSource igniteSFX;
+    public AudioSource lockClickSFX;
     public AudioSource gateOpenSFX;
     public AudioSource templeofAmunRaMusic;
     public AudioSource flameOfAtenMusic;
@@ -183,7 +184,7 @@ public class MainManager : MonoBehaviour
             case "TorchOne":
                 if (torchOneBurning)
                     break;
-                igniteSFX.PlayOneShot(igniteSFX.clip, 1f);
+                StartCoroutine(igniteTorch());
                 burningTorchCount++;
                 torchOneBurning = true;
                 torchOnePS.Play();
@@ -192,7 +193,7 @@ public class MainManager : MonoBehaviour
             case "TorchTwo":
                 if (torchTwoBurning)
                     break;
-                igniteSFX.PlayOneShot(igniteSFX.clip, 1f);
+                StartCoroutine(igniteTorch());
                 burningTorchCount++;
                 torchTwoBurning = true;
                 torchTwoPS.Play();
@@ -201,7 +202,7 @@ public class MainManager : MonoBehaviour
             case "TorchThree":
                 if (torchThreeBurning)
                     break;
-                igniteSFX.PlayOneShot(igniteSFX.clip, 1f);
+                StartCoroutine(igniteTorch());
                 burningTorchCount++;
                 torchThreeBurning = true;
                 torchThreePS.Play();
@@ -225,6 +226,13 @@ public class MainManager : MonoBehaviour
         {
             StartCoroutine(gateOpen());
         }
+    }
+
+    private IEnumerator igniteTorch()
+    {
+        igniteSFX.PlayOneShot(igniteSFX.clip, 1f);
+        yield return new WaitForSeconds(2f);
+        lockClickSFX.PlayOneShot(lockClickSFX.clip, 1f);
     }
 
     private IEnumerator gateOpen()

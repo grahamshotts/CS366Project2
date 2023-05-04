@@ -9,11 +9,14 @@ public class BulletMove : MonoBehaviour
     public Vector3 direction;
     public float speed = 0.1f;
     public PlayerShoot playerShoot;
+    public GameObject explosionSys;
+
+    private bool alreadyHit = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(this.gameObject, 10);
+        Destroy(this.gameObject, 5);
     }
 
     // Update is called once per frame
@@ -38,6 +41,8 @@ public class BulletMove : MonoBehaviour
             //Play audio:
             enemyHitSFX.PlayOneShot(enemyHitSFX.clip, 1f);
             playerShoot.enemiesHitGroupOne++;
+            GameObject explosion = Instantiate(explosionSys);
+            explosion.transform.position = this.transform.position;
             Destroy(gameObject);
         }
 
@@ -46,6 +51,8 @@ public class BulletMove : MonoBehaviour
             //Play audio:
             enemyHitSFX.PlayOneShot(enemyHitSFX.clip, 1f);
             playerShoot.enemiesHitGroupTwo++;
+            GameObject explosion = Instantiate(explosionSys);
+            explosion.transform.position = this.transform.position;
             Destroy(gameObject);
         }
 
@@ -54,6 +61,8 @@ public class BulletMove : MonoBehaviour
             //Play audio:
             enemyHitSFX.PlayOneShot(enemyHitSFX.clip, 1f);
             playerShoot.enemiesHitGroupThree++;
+            GameObject explosion = Instantiate(explosionSys);
+            explosion.transform.position = this.transform.position;
             Destroy(gameObject);
         }
 
@@ -62,7 +71,24 @@ public class BulletMove : MonoBehaviour
             //Play audio:
             enemyHitSFX.PlayOneShot(enemyHitSFX.clip, 1f);
             playerShoot.enemiesHitGroupFour++;
+            GameObject explosion = Instantiate(explosionSys);
+            explosion.transform.position = this.transform.position;
             Destroy(gameObject);
+        }
+
+        if (gameObject.tag == "Anubis")
+        {
+            if (alreadyHit)
+                return;
+            alreadyHit = true;
+            if (playerShoot.enemiesHitGroupOne != 4 || playerShoot.enemiesHitGroupTwo != 4 || playerShoot.enemiesHitGroupThree != 4 || playerShoot.enemiesHitGroupFour != 4)
+                return;
+            //Play audio:
+            enemyHitSFX.PlayOneShot(enemyHitSFX.clip, 1f);
+            AnubisMove anubisMove = gameObject.GetComponent<AnubisMove>();
+            anubisMove.hurtAnubis();
+            GameObject explosion = Instantiate(explosionSys);
+            explosion.transform.position = this.transform.position;
         }
     }
 }
