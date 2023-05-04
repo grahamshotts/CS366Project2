@@ -536,9 +536,9 @@ MonoBehaviour:
   hitGameObject: {fileID: 0}
   tempHitGameObject: {fileID: 0}
   mainManager: {fileID: 0}
-  igniteText: {fileID: 0}
   characterController: {fileID: 997303516672603136}
   itemLight: {fileID: 997303516672603166}
+  shooter: {fileID: 997303516672603165}
   footstepOneSFX: {fileID: 6538503187720745827}
   footstepTwoSFX: {fileID: 7185778287220293683}
   footstepThreeSFX: {fileID: 4305768382868569019}
@@ -547,19 +547,21 @@ MonoBehaviour:
   manaPickupSFX: {fileID: 997303516133453690}
   manaRechargeSFX: {fileID: 997303515993118418}
   healthPickupSFX: {fileID: 0}
-  shieldPikcupSFX: {fileID: 0}
+  shieldPickupSFX: {fileID: 0}
+  shieldDamageSFX: {fileID: 0}
+  playerDamageSFX: {fileID: 0}
   walkSFXDelay: 0.5
   manaMax: 100
   currentMana: 0
   collectedManaPickups: 0
   manaRechargeAmmt: 30
   manaDischargeRate: 20
+  currentHealth: 0
+  currentShield: 0
   manaCollectedText: {fileID: 0}
   manaRemainingText: {fileID: 0}
   healthText: {fileID: 0}
-  currentHealth: 0
-  currentShield: 0
-  shooter: {fileID: 997303516672603165}
+  igniteText: {fileID: 0}
   actualSpeed: 0
   actualSpeedForward: 0
 --- !u!54 &997303516672603167
