@@ -7,7 +7,12 @@ public class AnubisMove : MonoBehaviour
 {
     //Public Variables:
     public float enemySpeed = 2f;
+    public GameObject bullet;
+    public GameObject shootPoint;
     public GameObject playerObject;
+    public AudioSource manaAttackSFX;
+    public float coolDownTime = 0.5f;
+    public float bulletSpeed = 5f;
     public MainManager mainManager;
     public GameObject mainManagerObject;
     public Vector3 homePosition;
@@ -19,6 +24,8 @@ public class AnubisMove : MonoBehaviour
     public float zOffset = 1.08f;
     public float tooClose = 4f;
     public float collisionMargin = 0.2f;
+    public float attackTimeDuration = 3f;
+    public float restTimeDuration = 5f;
     public float yRotateOffset = 90f;
     public enum enemyPositionEnum { one, two, three, four };
     public enemyPositionEnum enemyPos = enemyPositionEnum.one;
@@ -26,7 +33,10 @@ public class AnubisMove : MonoBehaviour
     //public ParticleSystem line;
 
     //Private Variables:
+    private bool inCoolDown = false;
     private bool trackingPlayer = false;
+    private bool attackPlayerTime = false;
+    private bool coroutineCallNeeded = true;
     private Vector3 positionOne;
     private Vector3 positionTwo;
     private Vector3 positionThree;
@@ -73,19 +83,44 @@ public class AnubisMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (coroutineCallNeeded)
+        {
+            coroutineCallNeeded = false;
+            StartCoroutine(cycleAttackPlayerTime());
+        }
 
         playerObject = mainManager.playerInstance;
         if (inPause)
             return;
 
-        if (Vector3.Distance(this.transform.position, playerObject.transform.position) < tooClose)
+        if (mainManager.playerInAnubisArea && ((Vector3.Distance(this.transform.position, playerObject.transform.position) < tooClose) || attackPlayerTime))
         {
             trackingPlayer = true;
             this.transform.LookAt(playerObject.transform.position);
+            shootPoint.transform.LookAt(playerObject.transform.position);
             this.transform.Rotate(0, yRotateOffset, 0);
 
-            //Attack Mechanics
+            if (!inCoolDown)
+            {
+                //Manage cool down with coroutine:
+                inCoolDown = true;
+                StartCoroutine(CoolDown());
 
+                //Spawn magic bullet:
+                GameObject go = Instantiate(bullet);
+                go.transform.position = shootPoint.transform.position;
+                go.transform.rotation = shootPoint.transform.rotation;
+                AnubisBulletMove b = go.GetComponent<AnubisBulletMove>();
+                b.speed = bulletSpeed;
+                b.anubisMove = this;
+                b.transform.rotation = shootPoint.transform.rotation;
+                b.direction = shootPoint.transform.rotation.eulerAngles;
+
+                //Play audio:
+                manaAttackSFX.PlayOneShot(manaAttackSFX.clip, 0.6f);
+
+                return;
+            }
 
             return;
         }
@@ -142,6 +177,21 @@ public class AnubisMove : MonoBehaviour
             mainManager.endEvents();
             Destroy(this.gameObject);
         }
+    }
+
+    IEnumerator CoolDown()
+    {
+        yield return new WaitForSeconds(coolDownTime);
+        inCoolDown = false;
+    }
+
+    private IEnumerator cycleAttackPlayerTime()
+    {
+        attackPlayerTime = true;
+        yield return new WaitForSeconds(attackTimeDuration);
+        attackPlayerTime = false;
+        yield return new WaitForSeconds(restTimeDuration);
+        coroutineCallNeeded = true;
     }
 
     private IEnumerator endPause()

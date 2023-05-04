@@ -438,14 +438,17 @@ public class FPMove : MonoBehaviour
         if (!Input.GetKey(KeyCode.Mouse1) && (currentShield > 0))
         {
             currentHealth -= damageAmount;
+            healthText.text = currentHealth + "/10 Health";
             playerDamageSFX.PlayOneShot(playerDamageSFX.clip, 1f);
         }
         else
         {
             currentShield -= damageAmount;
+            healthText.text = currentHealth + "/10 Health";
             shieldDamageSFX.PlayOneShot(playerDamageSFX.clip, 1f);
         }
     }
+
     public void playerDeath()
     {
         //insert player death code here
