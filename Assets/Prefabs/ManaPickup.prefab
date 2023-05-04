@@ -4855,6 +4855,7 @@ GameObject:
   - component: {fileID: 1583090443136560983}
   - component: {fileID: -5238274821675429309}
   - component: {fileID: -1161974894349828816}
+  - component: {fileID: -1111086015137912736}
   m_Layer: 0
   m_Name: ManaPickup
   m_TagString: ManaPickup
@@ -4907,7 +4908,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f2ff3878ae9a8b41943d7c307e6c04a, type: 2}
+  - {fileID: 2100000, guid: afcb0495a31afc2449b17e58922b44d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4971,6 +4972,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpeed: 10
+--- !u!114 &-1111086015137912736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583090443136560976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1877b12cddae7c4eaac8a4ad4138a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomShader: {fileID: 1583090443136560982}
 --- !u!1 &9122243633729346181
 GameObject:
   m_ObjectHideFlags: 0
