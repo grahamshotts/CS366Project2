@@ -25,6 +25,7 @@ public class MainManager : MonoBehaviour
     public AudioSource igniteSFX;
     public AudioSource lockClickSFX;
     public AudioSource gateOpenSFX;
+    public AudioSource gameWinSFX;
     public AudioSource templeofAmunRaMusic;
     public AudioSource flameOfAtenMusic;
     public AudioSource birminghamMusic;
@@ -43,6 +44,7 @@ public class MainManager : MonoBehaviour
     public Vector3 manaFourSpawnThree;
     //Game objects
     public GameObject manaPrefab;
+    public GameObject confettiParticles;
     public GameObject gates;
     //Text
     public TMP_Text manaCollectedText;
@@ -226,6 +228,29 @@ public class MainManager : MonoBehaviour
         {
             StartCoroutine(gateOpen());
         }
+    }
+
+    public void endEvents()
+    {
+        StartCoroutine(endEventsEnumerator());
+    }
+
+    private IEnumerator endEventsEnumerator()
+    {
+        flameOfAtenMusic.Stop();
+        birminghamMusic.Stop();
+        gameWinSFX.PlayOneShot(gameWinSFX.clip, 1f);
+        yield return new WaitForSeconds(3.2f);
+        GameObject explosion = Instantiate(confettiParticles);
+        explosion.transform.position = this.transform.position;
+        yield return new WaitForSeconds(0.3f);
+        explosion = Instantiate(confettiParticles);
+        explosion.transform.position = this.transform.position;
+        yield return new WaitForSeconds(0.3f);
+        explosion = Instantiate(confettiParticles);
+        explosion.transform.position = this.transform.position;
+        yield return new WaitForSeconds(3f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("OverScene");
     }
 
     private IEnumerator igniteTorch()

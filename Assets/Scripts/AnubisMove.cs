@@ -139,6 +139,7 @@ public class AnubisMove : MonoBehaviour
         enemySpeed *= 1.2f;
         if (anubisHealth == 0)
         {
+            mainManager.endEvents();
             Destroy(this.gameObject);
         }
     }
