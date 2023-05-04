@@ -40412,6 +40412,134 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c9a1d73a420e7e14daf6d9bb2a2708fb, type: 3}
+--- !u!1 &1475724782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1475724783}
+  - component: {fileID: 1475724784}
+  m_Layer: 0
+  m_Name: birminghamMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1475724783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475724782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1916878487}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1475724784
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475724782}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: eacb842673b5e1a4189a192fee25f60e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1486519533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46228,10 +46356,6 @@ MonoBehaviour:
   torchTwoBurning: 0
   torchThreeBurning: 0
   torchFourBurning: 0
-  igniteSFX: {fileID: 759524547}
-  gateOpenSFX: {fileID: 781706274}
-  templeofAmunRaMusic: {fileID: 935714920}
-  flameOfAtenMusic: {fileID: 507572066}
   torchOnePS: {fileID: 1049657754}
   torchTwoPS: {fileID: 973309378}
   torchThreePS: {fileID: 829815403}
@@ -46240,6 +46364,11 @@ MonoBehaviour:
   torchTwoLight: {fileID: 1193581420}
   torchThreeLight: {fileID: 1412091522}
   torchFourLight: {fileID: 870414309}
+  igniteSFX: {fileID: 759524547}
+  gateOpenSFX: {fileID: 781706274}
+  templeofAmunRaMusic: {fileID: 935714920}
+  flameOfAtenMusic: {fileID: 507572066}
+  birminghamMusic: {fileID: 1475724784}
   manaOneSpawnOne: {x: 14, y: -1, z: 3}
   manaOneSpawnTwo: {x: 17, y: -1, z: 1}
   manaOneSpawnThree: {x: 13, y: -1, z: 2}
@@ -46252,16 +46381,17 @@ MonoBehaviour:
   manaFourSpawnOne: {x: 3, y: -1, z: -14}
   manaFourSpawnTwo: {x: 1, y: -1, z: -17}
   manaFourSpawnThree: {x: 2, y: -1, z: -13}
-  playerSpawnPoint: {x: 15, y: 1.08, z: -3}
-  playerPrefab: {fileID: 997303516672603142, guid: 6ac0d8c7e9457cc439a906bc38ea9e19, type: 3}
-  playerInstance: {fileID: 0}
   manaPrefab: {fileID: 1583090443136560976, guid: d2527fa4142e0144aad1a379b6f4117e, type: 3}
   gates: {fileID: 1293622890}
   manaCollectedText: {fileID: 1870901564}
   manaRemainingText: {fileID: 1081495049}
   healthText: {fileID: 2139101729}
   igniteText: {fileID: 601601331}
+  playerSpawnPoint: {x: 15, y: 1.08, z: -3}
+  playerPrefab: {fileID: 997303516672603142, guid: 6ac0d8c7e9457cc439a906bc38ea9e19, type: 3}
+  playerInstance: {fileID: 0}
   gameMoveSpeed: 1.8
+  birminghamMode: 0
 --- !u!4 &1916878487
 Transform:
   m_ObjectHideFlags: 0
@@ -46278,6 +46408,7 @@ Transform:
   - {fileID: 781706273}
   - {fileID: 935714919}
   - {fileID: 507572065}
+  - {fileID: 1475724783}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -11,6 +11,7 @@ using TMPro;
 public class FPMove : MonoBehaviour
 {
     //Public Variables:
+    //Movement
     public float speed;
     public float sprintSpeed;
     public float camMoveXSpeed = 80f;
@@ -18,13 +19,15 @@ public class FPMove : MonoBehaviour
     public float movementLerpConstantAccel = 0.2f;
     public float movementLerpConstantDecel = 0.5f;
     public float sprintBurstTimeMax = 5f;
+    //GameObjects
     public GameObject cameraObject;
     public GameObject hitGameObject;
     public GameObject tempHitGameObject;
     public MainManager mainManager;
-    public TMP_Text igniteText;
     public CharacterController characterController;
     public Light itemLight;
+    public PlayerShoot shooter;
+    //Audio
     public AudioSource footstepOneSFX;
     public AudioSource footstepTwoSFX;
     public AudioSource footstepThreeSFX; 
@@ -37,17 +40,20 @@ public class FPMove : MonoBehaviour
     public AudioSource shieldDamageSFX;
     public AudioSource playerDamageSFX;
     public float walkSFXDelay = 0.5f;
+    //Player Status
     public int manaMax = 100;
     public float currentMana;
     public int collectedManaPickups = 0;
     public int manaRechargeAmmt = 30;
     public float manaDischargeRate = 10f;
+    public int currentHealth;
+    public int currentShield;
+    //Text
     public TMP_Text manaCollectedText;
     public TMP_Text manaRemainingText;
     public TMP_Text healthText;
-    public int currentHealth;
-    public int currentShield;
-    public PlayerShoot shooter;
+    public TMP_Text igniteText;
+  
 
     //Private Variables:
     public float actualSpeed;
@@ -322,7 +328,7 @@ public class FPMove : MonoBehaviour
 
     public void RechargeMechanics()
     {
-        if (Input.GetKey(KeyCode.R) && !rechargingMana && collectedManaPickups > 0 && currentMana != 100f)
+        if (Input.GetKey(KeyCode.R) && !rechargingMana && collectedManaPickups > 0 && currentMana != 100f && !mainManager.birminghamMode)
         {
             StartCoroutine(rechargeMana());
         }
@@ -405,7 +411,8 @@ public class FPMove : MonoBehaviour
         if (gameObject.tag == "ManaPickup")
         {
             collectedManaPickups++;
-            manaCollectedText.text = collectedManaPickups + " Recharges";
+            if(!mainManager.birminghamMode)
+                manaCollectedText.text = collectedManaPickups + " Recharges";
 
             manaPickupSFX.PlayOneShot(manaPickupSFX.clip, 1f);
 
@@ -415,6 +422,8 @@ public class FPMove : MonoBehaviour
         {
             currentHealth = 10;
             healthPickupSFX.PlayOneShot(healthPickupSFX.clip, 1f);
+            if (!mainManager.birminghamMode)
+                healthText.text = currentHealth + "/10 Health";
         }
         if (gameObject.tag == "ShieldPickup")
         {
@@ -424,6 +433,8 @@ public class FPMove : MonoBehaviour
 
     public void damagePlayer(int damageAmount)
     {
+        if (mainManager.birminghamMode)
+            return;
         if (!Input.GetKey(KeyCode.Mouse1) && (currentShield > 0))
         {
             currentHealth -= damageAmount;

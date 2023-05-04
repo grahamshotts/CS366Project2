@@ -49,8 +49,11 @@ public class PlayerShoot : MonoBehaviour
             b.direction = shootPoint.transform.rotation.eulerAngles;
 
             //Manage mana:
-            manaControl.currentMana -= 10;
-            manaControl.manaRemainingText.text = manaControl.currentMana.ToString("F1") + "/" + manaControl.manaMax + " Mana";
+            if (!manaControl.mainManager.birminghamMode)
+            {
+                manaControl.currentMana -= 10;
+                manaControl.manaRemainingText.text = manaControl.currentMana.ToString("F1") + "/" + manaControl.manaMax + " Mana";
+            }
 
             //Play audio:
             manaAttackSFX.PlayOneShot(manaAttackSFX.clip, 0.6f);

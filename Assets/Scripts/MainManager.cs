@@ -7,15 +7,12 @@ using TMPro;
 public class MainManager : MonoBehaviour
 {
     //Public Variables:
+    //Torch
     public int burningTorchCount = 0;
     public bool torchOneBurning = false;
     public bool torchTwoBurning = false;
     public bool torchThreeBurning = false;
     public bool torchFourBurning = false;
-    public AudioSource igniteSFX; 
-    public AudioSource gateOpenSFX;
-    public AudioSource templeofAmunRaMusic;
-    public AudioSource flameOfAtenMusic;
     public ParticleSystem torchOnePS;
     public ParticleSystem torchTwoPS;
     public ParticleSystem torchThreePS;
@@ -24,6 +21,13 @@ public class MainManager : MonoBehaviour
     public GameObject torchTwoLight;
     public GameObject torchThreeLight;
     public GameObject torchFourLight;
+    //Sound
+    public AudioSource igniteSFX; 
+    public AudioSource gateOpenSFX;
+    public AudioSource templeofAmunRaMusic;
+    public AudioSource flameOfAtenMusic;
+    public AudioSource birminghamMusic;
+    //Mana Spawns
     public Vector3 manaOneSpawnOne;
     public Vector3 manaOneSpawnTwo;
     public Vector3 manaOneSpawnThree;
@@ -36,16 +40,22 @@ public class MainManager : MonoBehaviour
     public Vector3 manaFourSpawnOne;
     public Vector3 manaFourSpawnTwo;
     public Vector3 manaFourSpawnThree;
-    public Vector3 playerSpawnPoint;
-    public GameObject playerPrefab;
-    public GameObject playerInstance;
+    //Game objects
     public GameObject manaPrefab;
     public GameObject gates;
+    //Text
     public TMP_Text manaCollectedText;
     public TMP_Text manaRemainingText;
     public TMP_Text healthText;
     public TMP_Text igniteText;
+
+    //Player
+    public Vector3 playerSpawnPoint;
+    public GameObject playerPrefab;
+    public GameObject playerInstance;
     public float gameMoveSpeed = 1.2f;
+
+    public bool birminghamMode = false;
 
     //Private Variables:
     private GameObject tempManaObject;
@@ -155,6 +165,15 @@ public class MainManager : MonoBehaviour
                 gates.transform.position = new Vector3(gates.transform.position.x, -6f, gates.transform.position.z);
             }
         }
+        if (Input.GetKeyDown(KeyCode.BackQuote) && !birminghamMode)
+        {
+            birminghamMode = true;
+            healthText.text = "Yes/10 Health";
+            manaRemainingText.text = "Yes/100 Mana";
+            manaCollectedText.text = "Yes Mana Recharges";
+            templeofAmunRaMusic.Stop();
+            birminghamMusic.PlayOneShot(birminghamMusic.clip);
+        }
     }
 
     public void igniteTorch(string torchTag)
@@ -218,6 +237,8 @@ public class MainManager : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
         gatesMoving = true;
         yield return new WaitForSeconds(3.8f);
-        flameOfAtenMusic.PlayOneShot(flameOfAtenMusic.clip, 1f);
+        if(!birminghamMode)
+            flameOfAtenMusic.PlayOneShot(flameOfAtenMusic.clip, 1f);
     }
+
 }
