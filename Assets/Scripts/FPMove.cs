@@ -71,6 +71,9 @@ public class FPMove : MonoBehaviour
     private bool inInitialStartup = true;
     private Vector3 direction;
     private GameObject lightSourceGameObject; //Null reference workaround for keeping itemLight "filled" with a light
+    public GameObject shield;
+    public GameObject guardPoint;
+    private GameObject block;
 
     // Start is called before the first frame update
     void Start()
@@ -95,6 +98,10 @@ public class FPMove : MonoBehaviour
         
 
         StartCoroutine(initialStartup());
+        block = Instantiate(shield);
+        block.transform.position = guardPoint.transform.position;
+        block.transform.rotation = guardPoint.transform.rotation;
+        block.SetActive(false);
     }
 
     // Update is called once per frame
@@ -103,6 +110,8 @@ public class FPMove : MonoBehaviour
         if (inInitialStartup) //Work-around for mana not being 100 at start up...
             return;
 
+        block.transform.position = guardPoint.transform.position;
+        block.transform.rotation = guardPoint.transform.rotation;
         //Do interact mechanics (lighting torches, etc...)
         InteractMechanics();
 
@@ -111,6 +120,15 @@ public class FPMove : MonoBehaviour
 
         //Get input and move every frame:
         GetInputAndMove();
+
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            block.SetActive(true);
+        }
+        else
+        {
+            block.SetActive(false);
+        }
 
         if (currentHealth <= 0)
             playerDeath();
