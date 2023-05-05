@@ -366,7 +366,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpeed: 2
-  playerObject: {fileID: 0}
+  playerObject: {fileID: 997303516672603142, guid: 6ac0d8c7e9457cc439a906bc38ea9e19, type: 3}
+  mainManager: {fileID: 0}
+  mainManagerObject: {fileID: 0}
+  player: {fileID: 997303516672603137, guid: 6ac0d8c7e9457cc439a906bc38ea9e19, type: 3}
   homePosition: {x: 0, y: 0, z: 0}
   homeOffset: 3
   zOffset: 1.08

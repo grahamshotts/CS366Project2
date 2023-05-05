@@ -10,6 +10,7 @@ public class EnemyMove : MonoBehaviour
     public GameObject playerObject;
     public MainManager mainManager;
     public GameObject mainManagerObject;
+    public FPMove player;
     public Vector3 homePosition;
     //public GameObject checkpointOne;
     //public GameObject checkpointTwo;
@@ -31,6 +32,7 @@ public class EnemyMove : MonoBehaviour
     private Vector3 positionThree;
     private Vector3 positionFour;
     private bool inPause = true;
+    private bool isAttacking = false;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +86,9 @@ public class EnemyMove : MonoBehaviour
             this.transform.Rotate(0, yRotateOffset, 0);
 
             //Attack Mechanics
+            if (!isAttacking)
+                StartCoroutine(attackPlayer());
+            
             
 
             return;
@@ -138,9 +143,10 @@ public class EnemyMove : MonoBehaviour
 
     private IEnumerator attackPlayer()
     {
+        isAttacking = true;
+        player.damagePlayer(1);
         yield return new WaitForSeconds(1);
-        //player.playerDamage(1);
-        
+        isAttacking = false;
     }
 
     //private IEnumerator lineParticle()

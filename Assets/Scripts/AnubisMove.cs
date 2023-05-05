@@ -16,6 +16,7 @@ public class AnubisMove : MonoBehaviour
     public MainManager mainManager;
     public GameObject mainManagerObject;
     public Vector3 homePosition;
+    public FPMove player;
     //public GameObject checkpointOne;
     //public GameObject checkpointTwo;
     //public GameObject checkpointThree;
@@ -42,6 +43,7 @@ public class AnubisMove : MonoBehaviour
     private Vector3 positionThree;
     private Vector3 positionFour;
     private bool inPause = true;
+    private bool isAttacking = false;
 
     // Start is called before the first frame update
     void Start()
@@ -202,9 +204,10 @@ public class AnubisMove : MonoBehaviour
 
     private IEnumerator attackPlayer()
     {
+        isAttacking = true;
+        player.damagePlayer(1);
         yield return new WaitForSeconds(1);
-        //player.playerDamage(1);
-
+        isAttacking = false;
     }
 
     //private IEnumerator lineParticle()
