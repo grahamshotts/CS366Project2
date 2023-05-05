@@ -90,5 +90,10 @@ public class BulletMove : MonoBehaviour
             GameObject explosion = Instantiate(explosionSys);
             explosion.transform.position = this.transform.position;
         }
+
+        if (gameObject.tag == "Obstacle")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
