@@ -452,5 +452,6 @@ public class FPMove : MonoBehaviour
     public void playerDeath()
     {
         //insert player death code here
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
     }
 }
