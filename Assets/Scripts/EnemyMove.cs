@@ -18,7 +18,7 @@ public class EnemyMove : MonoBehaviour
     //public GameObject checkpointFour;
     public float homeOffset = 3f;
     public float zOffset = 1.08f;
-    public float tooClose = 4f;
+    public float tooClose = 1f;
     public float collisionMargin = 0.2f;
     public float yRotateOffset = 90f;
     public enum enemyPositionEnum { one, two, three, four };
@@ -94,11 +94,11 @@ public class EnemyMove : MonoBehaviour
             trackingPlayer = true;
             this.transform.LookAt(playerObject.transform.position);
             this.transform.Rotate(0, yRotateOffset, 0);
+            this.transform.position += enemySpeed * this.transform.forward * Time.deltaTime;
 
             //Attack Mechanics
-            if (!isAttacking)
+            if (!isAttacking && Vector3.Distance(this.transform.position, playerObject.transform.position) < 1f)
                 StartCoroutine(attackPlayer());
-            
             
 
             return;
