@@ -79,6 +79,7 @@ public class FPMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         //For movement:
         sprintBurstTime = sprintBurstTimeMax;
         actualSpeed = speed;
@@ -452,6 +453,8 @@ public class FPMove : MonoBehaviour
 
     public void damagePlayer(int damageAmount)
     {
+        UnityEngine.Debug.Log("Damage ammount: " + damageAmount);
+
         if (mainManager.birminghamMode)
             return;
         if (Input.GetKey(KeyCode.Mouse1) && ((currentMana) > shieldDamageAmmount))
@@ -474,6 +477,6 @@ public class FPMove : MonoBehaviour
     public void playerDeath()
     {
         //insert player death code here
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
     }
 }

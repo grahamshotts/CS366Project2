@@ -33,6 +33,7 @@ public class EnemyMove : MonoBehaviour
     private Vector3 positionFour;
     private bool inPause = true;
     private bool isAttacking = false;
+    private bool playerSet = false;
 
     // Start is called before the first frame update
     void Start()
@@ -74,10 +75,19 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        playerObject = mainManager.playerInstance;
         if (inPause)
+        {
             return;
+        }
+        else
+        {
+            if (!playerSet)
+            {
+                playerSet = true;
+                playerObject = mainManager.playerInstance;
+                player = playerObject.GetComponent<FPMove>();
+            }
+        }
 
         if (Vector3.Distance(this.transform.position, playerObject.transform.position) < tooClose)
         {
