@@ -441,7 +441,7 @@ public class FPMove : MonoBehaviour
         if (gameObject.tag == "HealthPickup")
         {
             currentHealth = 10;
-            healthPickupSFX.PlayOneShot(healthPickupSFX.clip, 1f);
+            //healthPickupSFX.PlayOneShot(healthPickupSFX.clip, 1f);
             if (!mainManager.birminghamMode)
                 healthText.text = currentHealth + "/10 Health";
         }
