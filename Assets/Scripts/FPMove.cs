@@ -43,6 +43,7 @@ public class FPMove : MonoBehaviour
     //Player Status
     public int manaMax = 100;
     public float currentMana;
+    public float shieldDamageAmmount = 5f;
     public int collectedManaPickups = 0;
     public int manaRechargeAmmt = 30;
     public float manaDischargeRate = 10f;
@@ -453,15 +454,18 @@ public class FPMove : MonoBehaviour
     {
         if (mainManager.birminghamMode)
             return;
-        if (!Input.GetKey(KeyCode.Mouse1) && (currentShield > 0))
+        if (Input.GetKey(KeyCode.Mouse1) && ((currentMana) > shieldDamageAmmount))
         {
-            currentHealth -= damageAmount;
-            healthText.text = currentHealth + "/10 Health";
+            currentMana -= shieldDamageAmmount;
+            mainManager.manaUsed += shieldDamageAmmount;
+            manaRemainingText.text = currentMana.ToString("F1") + "/" + manaMax + " Mana";
             playerDamageSFX.PlayOneShot(playerDamageSFX.clip, 1f);
         }
         else
         {
-            currentShield -= damageAmount;
+            currentHealth -= damageAmount;
+            if (currentHealth < 0)
+                currentHealth = 0;
             healthText.text = currentHealth + "/10 Health";
             shieldDamageSFX.PlayOneShot(playerDamageSFX.clip, 1f);
         }

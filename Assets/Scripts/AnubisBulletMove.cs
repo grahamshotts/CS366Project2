@@ -43,7 +43,6 @@ public class AnubisBulletMove : MonoBehaviour
             fpMove.damagePlayer(damageAmmount);
             GameObject explosion = Instantiate(explosionSys);
             explosion.transform.position = this.transform.position;
-            Destroy(gameObject);
         }
     }
 }

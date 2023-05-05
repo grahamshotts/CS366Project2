@@ -59,6 +59,11 @@ public class MainManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject playerInstance;
     public float gameMoveSpeed = 1.2f;
+    //Stats
+    public float manaUsed = 0f;
+    public float timeElapsed = 0f;
+    private const string manaUsedKey = "ManaUsed";
+    private const string timeElapsedKey = "TimeElapsed";
 
     public bool birminghamMode = false;
 
@@ -162,6 +167,8 @@ public class MainManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timeElapsed += Time.deltaTime;
+
         if (gateMovingDown)
         {
             gates.transform.position = new Vector3(gates.transform.position.x, gates.transform.position.y - gameMoveSpeed * Time.deltaTime, gates.transform.position.z);
@@ -181,6 +188,12 @@ public class MainManager : MonoBehaviour
                 gates.transform.position = new Vector3(gates.transform.position.x, 0f, gates.transform.position.z);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            StartCoroutine(endEventsEnumerator());
+        }
+
 
         if (Input.GetKeyDown(KeyCode.BackQuote) && !birminghamMode)
         {
@@ -255,6 +268,8 @@ public class MainManager : MonoBehaviour
         birminghamMusic.Stop();
         gameWinSFX.PlayOneShot(gameWinSFX.clip, 1f);
         yield return new WaitForSeconds(3.2f);
+        PlayerPrefs.SetFloat(timeElapsedKey, timeElapsed);
+        PlayerPrefs.SetFloat(manaUsedKey, manaUsed);
         GameObject explosion = Instantiate(confettiParticles);
         explosion.transform.position = this.transform.position;
         yield return new WaitForSeconds(0.3f);
@@ -264,7 +279,7 @@ public class MainManager : MonoBehaviour
         explosion = Instantiate(confettiParticles);
         explosion.transform.position = this.transform.position;
         yield return new WaitForSeconds(3f);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("OverScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
     }
 
     private IEnumerator igniteTorch()

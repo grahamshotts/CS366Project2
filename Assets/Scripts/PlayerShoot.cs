@@ -54,6 +54,7 @@ public class PlayerShoot : MonoBehaviour
                 //Manage mana:
                 if (!manaControl.mainManager.birminghamMode)
                 {
+                    manaControl.mainManager.manaUsed += 10;
                     manaControl.currentMana -= 10;
                     manaControl.manaRemainingText.text = manaControl.currentMana.ToString("F1") + "/" + manaControl.manaMax + " Mana";
                 }
